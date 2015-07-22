@@ -1,5 +1,12 @@
-Reliable Data Transfer Over UDP
-===============================
+Window-Based Reliable Data Transfer Over UDP
+============================================
+
+Selective Repeat (SR) protocol
+------------------------------
+- Use one timeout for entire window of sent packets
+- Resend packets which are not ACK’d
+- Move window by number of ACK’s and send new packets
+
 Overview
 --------
 We implemented reliable data transfer using the **Selective-Repeat (SR)** protocol. In our design we used one timer for the entire window instead of a separate timer for each packet (i.e. on timeout we resend all the packets for which we have not received ACKs for).
@@ -26,7 +33,7 @@ Implementation
 Our sender and receiver network applications communicated with one another using a common packet data structure which we defined as follows:
 ```
 typedef struct {
-    int type;
+    int type; // DATA, QRY, ACK, DATA, FIN, FIN_ACK, BAD, MSG
     unsigned int seq; unsigned int size;
     char data[DATA_SIZE];
     } Packet;
