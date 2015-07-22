@@ -14,7 +14,7 @@ We implemented reliable data transfer using the **Selective-Repeat (SR)** protoc
 A simple walkthrough of the file transfer process:
 
 1. Receiver sends a QRY packet to the sender (repeatedly until it receives a response)
-2. Sender opens the file listed in the data filed of the packet
+2. Sender opens the file listed in the data field of the packet
   - If it exists send n DATA packets (where n is the window size)
   - If it doesn’t exist then send a BAD packet and close the sender
 3. Receiver writes the packets to the file if they are in sequence
